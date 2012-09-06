@@ -1,0 +1,18 @@
+<div class="span12">
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= image_tag "http://graph.facebook.com/#{@user.uid}/picture?type=small" %> <%= @user.name %>
+</h2>
+
+<h3><%= @user.firstname %>'s Lists</h3>
+<table  class='table table-striped'>
+    
+<% @user.lists.each do |list| %>
+    <tr>
+    <td><%= link_to list.name, list %></td>
+    </tr>
+<% end %>
+</table>
+<%= link_to 'New List', new_list_path, class: 'btn btn-info' %>
+</div>

@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= @venue.name %>
+</h2>
+<p class="lead">
+    <%= @venue.address %>
+</p>
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=400x400&maptype=roadmap
+&markers=color:blue%7Clabel:%7C#{@venue.latitude},#{@venue.longitude}&sensor=false" %>
+

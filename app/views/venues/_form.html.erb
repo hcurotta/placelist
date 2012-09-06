@@ -1,0 +1,39 @@
+<script>
+navigator.geolocation.getCurrentPosition(GeoL);
+function GeoL(position) {
+     document.getElementById('venue_latitude').value = position.coords.latitude;
+     document.getElementById('venue_longitude').value = position.coords.longitude;
+}
+
+</script>
+
+<%= form_for(@venue) do |f| %>
+  <% if @venue.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@venue.errors.count, "error") %> prohibited this venue from being saved:</h2>
+
+      <ul>
+      <% @venue.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :latitude %>
+  </div>  
+   
+  <div class="field">
+    <%= f.hidden_field :longitude %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

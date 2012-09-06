@@ -1,0 +1,11 @@
+<div class="span12">
+<h1>This is 10 places</h1>
+<p>
+<% if current_user %>
+  <p>Welcome back, <%= current_user.name %>!</p>
+  <%= link_to "Sign Out", signout_path, class: "btn btn-primary" %>
+<% else %>
+  <%= link_to "Sign in with Facebook", "/auth/facebook", class: "btn btn-primary" %>
+<% end %>
+</p>
+</div>

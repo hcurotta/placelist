@@ -1,0 +1,14 @@
+<script>
+    navigator.geolocation.getCurrentPosition(GeoL);
+    function GeoL(position) {
+         document.getElementById('lat').value = position.coords.latitude;
+         document.getElementById('lng').value = position.coords.longitude;
+    }
+</script>
+
+<%= form_tag("/search", method: "post") do %>
+    <%= text_field_tag :q, nil,placeholder: "Search places to add" %>
+    <%=hidden_field_tag :lat %>
+    <%=hidden_field_tag :lng %>
+    <%=hidden_field_tag :list_id, @list.id %>
+<% end %>
