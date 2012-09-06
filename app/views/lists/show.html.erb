@@ -14,7 +14,7 @@
 
 <ul data-role="listview" data-theme="b">
 <% @list.venues.each do |venue| %>
-	<li><%= link_to venue.name, venue %></li>
+	<li><%= link_to venue.name, venue_path(:id => venue.id, :list_id => @list.id) %></li>
 <% end %>
 </ul>
 
