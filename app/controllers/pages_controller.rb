@@ -6,4 +6,8 @@ def home
   end
 end
 
+def discover
+  @lists = List.all
+end
+
 end

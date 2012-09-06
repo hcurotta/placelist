@@ -16,6 +16,8 @@ TenPlaces::Application.routes.draw do
   match "/signout" => "sessions#destroy", :as => :signout
   
   post "/search" => "venues#search", :as => :venue_search
-  
+  get  "/discover" => "pages#discover", :as => :discover
+  post  "/subscribe" => "subscriptions#new", :as => :subscribe
+  delete "/subscribe" => "subscriptions#destroy", :as => :unsubscribe
 
 end

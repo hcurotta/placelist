@@ -1,0 +1,19 @@
+<h1>Discover</h1>
+<p class="lead">
+    Popular playlists around you
+    <div class="well" style="padding: 0px 0px;">
+        <ul class="nav nav-list">
+        <li class="nav-header">Trending</li>
+        <% @lists.each do |list| %>
+            <li><%= link_to list.name, list_path(list) %></li>
+        <% end %>
+        
+        <li class="nav-header">Weather Friendly</li>
+        <% @lists.each do |list| %>
+            <li><%= link_to list.name, list_path(list) %></li>
+        <% end %>
+        
+        </ul>
+    <div>
+</p>
+

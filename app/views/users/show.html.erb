@@ -15,4 +15,18 @@
 <% end %>
 </table>
 <%= link_to 'New List', new_list_path, class: 'btn btn-info' %>
+
+
+<h3>Subscriptions</h3>
+<table  class='table table-striped'>
+<% @subscriptions.each do |subscription| %>
+    <tr>
+    <td><%= link_to subscription.list.name, subscription.list %></td>
+    </tr>
+<% end %>
+</table>
+
+<%= link_to 'Discover', discover_path, class: 'btn btn-info' %>
+
+
 </div>

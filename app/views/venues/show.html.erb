@@ -7,6 +7,6 @@
     <%= @venue.address %>
 </p>
 <p><%= image_tag "http://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=400x400&maptype=roadmap
-&markers=color:blue%7Clabel:%7C#{@venue.latitude},#{@venue.longitude}&sensor=false" %></p>
+&markers=color:blue%7Clabel:%7C#{@venue.latitude},#{@venue.longitude}&sensor=false", class: "img-circle" %></p>
 
 <p><%= link_to 'Back to Playlist', list_path(params[:list_id]) %>

@@ -14,7 +14,13 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @list = List.find(params[:id])
-
+    
+    @owner = true if current_user.id == @list.user_id
+    
+    @list.subscriptions.each do |subscriber|
+      @subscriber = true if subscriber.user_id == current_user.id
+    end
+      
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @list }

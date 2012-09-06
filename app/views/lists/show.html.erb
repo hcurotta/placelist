@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
-
 <h2>
   <%= @list.name %>
 </h2>
@@ -10,9 +8,28 @@
   <%= @list.description %>
 </p>
 
-<%= render "venue_search" %>
+<% if @subscriber == true %>
+<div class="btn-group">
+<span class="btn btn-success disabled" data-toggle="dropdown"><i class="icon-ok"></i> Subscribed</span>
+<a class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+      <%= link_to "Unsubscribe", subscribe_path(:list_id => @list.id), method: "delete"%>
+  </ul>
+</div>
 
-<ul data-role="listview" data-theme="b">
+
+<% else %>
+<p>
+<%= link_to "Subscribe", subscribe_path(:id => @list.id, :name => @list.name), method: "post", class: "btn btn-success" unless @owner  %>
+<% end %>
+</p>
+
+
+<%= render "venue_search" if @owner %>
+
+<ul class="nav nav-tabs nav-stacked">
 <% @list.venues.each do |venue| %>
 	<li><%= link_to venue.name, venue_path(:id => venue.id, :list_id => @list.id) %></li>
 <% end %>
