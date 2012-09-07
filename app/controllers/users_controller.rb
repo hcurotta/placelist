@@ -14,8 +14,22 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    
+    @owner = true if @user.id == current_user.id
+
     @subscriptions = @user.subscriptions
+    @num_followers = 0 
+   
+    @user.followers.each do |follower|
+      @num_followers += 1
+      @follower = true if follower.follower.id == current_user.id
+    end    
+    
+    @num_following = 0
+    
+    @user.following.each do |following|
+      @num_following += 1
+    end  
+    
     
     
     respond_to do |format|

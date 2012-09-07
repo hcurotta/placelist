@@ -1,12 +1,14 @@
-<p class="lead">Nearby Results</p>
+<p class="lead"><i class="icon-pushpin"></i> Nearby Results</p>
 <ul class="nav nav-tabs nav-stacked">
 <% @venue_results.each do |venue| %>
     <li>
         <%= link_to create_venue_path(:foursquareid => venue["id"], :name => venue["name"], :lat => venue["location"]["lat"], :long => venue["location"]["lng"], :address => venue["location"]["address"], :city => venue["location"]["city"], :list_id => @list_id), :method => :post do %>
-         <%= venue["name"]%>  <%=venue["location"]["address"] %> <%= venue["location"]["city"] %>
+        
+         <%= venue["name"]%>  <%=venue["location"]["address"] %> <%= venue["location"]["city"] %> <i class="icon-chevron-right pull-right"></i>
          
         <% end %>
         
     </li>
 <% end %>
 </ul>
+<%= image_tag "https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_gray.png" %>

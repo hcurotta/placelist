@@ -19,5 +19,10 @@ TenPlaces::Application.routes.draw do
   get  "/discover" => "pages#discover", :as => :discover
   post  "/subscribe" => "subscriptions#new", :as => :subscribe
   delete "/subscribe" => "subscriptions#destroy", :as => :unsubscribe
+  
+  match "/test_login" => "sessions#create_test", :as => :test_login
+  
+  post  "/follow" => "followings#new", :as => :follow
+  delete "/follow" => "followings#destroy", :as => :unfollow
 
 end

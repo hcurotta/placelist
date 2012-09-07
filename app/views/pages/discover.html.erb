@@ -1,14 +1,15 @@
-<h1>Discover</h1>
+<h1><i class="icon-globe"></i> Discover</h1>
+
 <p class="lead">
-    Popular playlists around you
+    These places are tops right about now...
     <div class="well" style="padding: 0px 0px;">
         <ul class="nav nav-list">
-        <li class="nav-header">Trending</li>
+        <li class="nav-header">Perfect on <%= @time_now%></li>
         <% @lists.each do |list| %>
             <li><%= link_to list.name, list_path(list) %></li>
         <% end %>
         
-        <li class="nav-header">Weather Friendly</li>
+        <li class="nav-header"><%= "Great when #{@condition} and #{@temperature.to_i}°C"%></li>
         <% @lists.each do |list| %>
             <li><%= link_to list.name, list_path(list) %></li>
         <% end %>
