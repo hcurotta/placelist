@@ -25,9 +25,9 @@ class User < ActiveRecord::Base
   
   def self.create_test_user
     create! do |user|
-      user.name = "Jimmy Smits"
-      user.uid = "100"
-      user.email = "jim@test.com"
+      user.name = "Tim Smith"
+      user.uid = "200"
+      user.email = "tim@test.com"
     end
   end
   

@@ -11,7 +11,7 @@ end
 def discover
   @lists = List.all
   
-  weather_json = open("http://api.wunderground.com/api/#{ENV["wunderground_key"]}/geolookup/conditions/q/37.776289,-122.395234.json").read
+  weather_json = open("http://api.wunderground.com/api/#{ENV["wunderground_key"]}/geolookup/conditions/q/#{params[:lat]},#{params[:long]}.json").read
   
   weather = JSON.parse(weather_json)["current_observation"]
   
@@ -19,8 +19,7 @@ def discover
   @temperature = weather["temp_c"]
   
   t = Time.now
-  
-  
+
   @time_now = case t.hour
     when 0..6 then "Early hours"
     when 7..11 then "Morning"

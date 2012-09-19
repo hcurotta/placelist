@@ -1,0 +1,12 @@
+<h2>
+  <%= params[:name] %>
+</h2>
+<p class="lead">
+    <%= params[:address] %>
+</p>
+
+<%= link_to "Add to list", create_venue_path({:params => params, :list_id => params[:list_id]}), method: :post, class: "btn btn-success" %>
+
+<p><%= image_tag "http://maps.googleapis.com/maps/api/staticmap?&zoom=16&size=400x400&maptype=roadmap
+&markers=color:blue%7Clabel:%7C#{params[:lat]},#{params[:long]}&sensor=false", class: "img-circle" %></p>
+

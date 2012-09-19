@@ -11,6 +11,20 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+
+
+// function getGeoLocation() {
+//   navigator.geolocation.getCurrentPosition(setGeoCookie);
+// }
+// 
+// function setGeoCookie(position) {
+//   var latitude = position.coords.latitude; 
+//   var longitude =  position.coords.longitude;
+//   document.cookie = "lat=" + escape(latitude);
+//   document.cookie = "long=" + escape(longitude);
+// }

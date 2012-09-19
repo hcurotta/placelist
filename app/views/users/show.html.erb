@@ -1,15 +1,56 @@
-<div class="span12">
-<p id="notice"><%= notice %></p>
+<script>
+// function setGeoCookie(position) {
+//   alert("Thanks for bla!");  
+// 
+//   var latitude = position.coords.latitude; 
+//   var longitude =  position.coords.longitude;
+//   $.cookie("Lat", latitude);
+//   $.cookie("Long", longitude);  
+// }
+// 
+// $(document).ready(function(){
+//   alert("Thanks for visiting!");  
+//   
+//   function getGeoLocation(position) {    
+//     navigator.geolocation.getCurrentPosition(setGeoCookie);
+//   }
+// });
 
+
+$(document).ready(function(){
+    alert("B");
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(savePosition);
+    }
+  else{
+  }
+  });
+  
+  function savePosition(position)
+  {
+    var latitude = position.coords.latitude; 
+    var longitude =  position.coords.longitude;
+    document.cookie = "lat=" + escape(latitude);
+    document.cookie = "long=" + escape(longitude);
+}
+
+</script>
+
+<div class="content">
+<p id="notice"><%= notice %></p>
 <div>
   <div> 
   <h1 style: "display:inline;">
-      <%= image_tag "http://graph.facebook.com/#{@user.uid}/picture?type=small", style: "float:left;margin:0 10px 0 0", class: "img-rounded" %> 
+      <%= image_tag "http://graph.facebook.com/#{@user.uid}/picture?type=large", width: "75", style: "float:left;margin:0 10px 0 0", class: "img-rounded" %> 
       <%= @owner ? "You" : @user.name %>
   </h1>
-    <p style="margin-left:65px;"><%= @num_followers %> followers | <%= @num_following %> following <%= @following.to_s %></p>
-  <div>
-      
+  
+    <p>
+    <%= link_to "#{@num_followers} followers", followers_path(@user.id) %> 
+    | 
+    <%= link_to "#{@num_following} following", following_path(@user.id) %>
+    </p>
       
   <% if @follower == true %>
   <div class="btn-group">
@@ -48,14 +89,23 @@
 
 
 <h3 style="display:inline;">Subscriptions</h3>
-<%= link_to discover_path, class: "pull-right" do %>
+<%= link_to discover_path(:lat => cookies[:lat], :long => cookies[:long]), class: "pull-right" do %>
 <i class="icon-globe"></i> Discover More
-<% end if @owner%>
+<% end if @owner & @subscriptions.any?%>
 <table  class='table table-striped'>
-<% @subscriptions.each do |subscription| %>
-    <tr>
-    <td><%= link_to subscription.list.name, subscription.list %></td>
-    </tr>
+<% if @subscriptions.any? %>  
+  <% @subscriptions.each do |subscription| %>
+      <tr>
+      <td><%= link_to subscription.list.name, subscription.list %></td>
+      </tr>
+  <% end %>
+<% else %>  
+  <p class="lead">You haven't subscribed to any playlists yet. 
+    </br>
+    <%= link_to discover_path(:lat => cookies[:lat], :long => cookies[:long]) do %>
+    <i class="icon-globe"></i> Go find some
+    <% end %>
+  </p>
 <% end %>
 </table>
 

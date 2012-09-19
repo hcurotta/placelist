@@ -8,7 +8,7 @@ TenPlaces::Application.routes.draw do
 
   resources :venues, :except => :create
   post "/venue" => "venues#create", :as => :create_venue
-  
+  get "/venue/select" => "venues#select", :as => :select_venue
 
   resources :users
   
@@ -24,5 +24,10 @@ TenPlaces::Application.routes.draw do
   
   post  "/follow" => "followings#new", :as => :follow
   delete "/follow" => "followings#destroy", :as => :unfollow
+  
+  get "/good_fors" => "GoodFors#index", :as => :goodfor
 
+  get "/users/:id/followers" => "Followings#followers", :as => :followers
+  get "/users/:id/following" => "Followings#following", :as => :following
+  
 end

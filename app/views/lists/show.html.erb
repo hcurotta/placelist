@@ -30,12 +30,18 @@
   <%= @list.description %>
 </p>
 
+<p class="lead">
+  <%= "Great for #{@list.good_for.what} on #{@list.good_on.daystring} #{@list.good_at.timestring.downcase}s when it's #{@list.good_when.weather_is.downcase} outside." %>
+</p>
+
 <%= render "venue_search" if @owner %>
 
 <ul class="nav nav-tabs nav-stacked">
-<% @list.venues.each do |venue| %>
-	<li><%= link_to venue.name, venue_path(:id => venue.id, :list_id => @list.id) %></li>
-<% end %>
+<% @list.list_items.each do |list_item| %>
+<% venue = list_item.venue %>
+	<li><%= link_to venue.name, venue_path(:id => venue.id, :list_id => @list.id, :list_item_id => list_item.id) %> 
+	<% end %>
+	</li>
 </ul>
 
 <%= link_to 'Edit', edit_list_path(@list) %> |

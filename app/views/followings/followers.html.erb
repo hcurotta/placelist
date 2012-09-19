@@ -1,0 +1,9 @@
+<div class="container">
+  <h4><%= "#{@user.followers.count} users are following #{@user.name}" %></h4>
+  
+  <ul>
+  <% @user.followers.each do |follower| %>
+    <li><%= follower.follower.name %></li>
+  <% end %>
+  </ul>
+</div>

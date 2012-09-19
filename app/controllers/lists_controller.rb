@@ -16,8 +16,7 @@ class ListsController < ApplicationController
     @list = List.find(params[:id])
     
     @owner = true if current_user.id == @list.user_id
-    
-    @list.subscriptions.each do |subscriber|
+      @list.subscriptions.each do |subscriber|
       @subscriber = true if subscriber.user_id == current_user.id
     end
       
@@ -31,7 +30,8 @@ class ListsController < ApplicationController
   # GET /lists/new.json
   def new
     @list = List.new
-
+    @good_for = GoodFor.create!
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @list }

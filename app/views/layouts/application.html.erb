@@ -27,17 +27,20 @@
           </a>
 
           <!-- Be sure to leave the brand out there if you want it shown -->
-          <a class="brand" href="/">10Places</a>
+          <a class="brand" href="/"><i class="icon-map-marker"></i> 10Places</a>
 
 
           <!-- Everything you want hidden at 940px or less, place within here -->
           <div class="nav-collapse">
               <ul class="nav">
-              <li><% if current_user %>
-                <%= link_to "Sign Out", signout_path %>
+              <% if current_user %>
+              <li><%= link_to user_path(current_user) do %><i class="icon-user"></i> Profile <% end %></li>
+              <li><%= link_to user_path(current_user) do %><i class="icon-facebook-sign"></i> Find Friends<% end %></li>
+              <li><%= link_to "#" do %><i class="icon-cogs"></i> Settings<% end %></li>
+              <li><%= link_to signout_path do %><i class="icon-signout"></i> Sign out<% end %></li>
               <% else %>
-                <%= link_to "Sign in", "/auth/facebook" %>
-              <% end %></li>
+              <li><%= link_to "/auth/facebook" do %><i class="icon-signin"></i> Sign in<% end %></li>
+              <% end %>
               </ul>
             <!-- .nav, .navbar-search, .navbar-form, etc -->
           </div>

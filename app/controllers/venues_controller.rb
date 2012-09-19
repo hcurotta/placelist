@@ -17,7 +17,9 @@ require "open-uri"
   # GET /venues/1.json
   def show
     @venue = Venue.find(params[:id])
-
+    
+    @list_item = ListItem.find_by_id(params[:list_item_id]) if params[:list_item_id].present?
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @venue }
@@ -43,8 +45,10 @@ require "open-uri"
   # POST /venues
   # POST /venues.json
   def create
+        
     
     @venue = Venue.find_by_foursquareid(params[:foursquareid])
+    
     
     if @venue.present?
       
@@ -121,12 +125,23 @@ require "open-uri"
     long = params[:lng]
     @list_id = params[:list_id]
     
+    
     json_venue_results = open("https://api.foursquare.com/v2/venues/suggestcompletion?query=#{query}&ll=#{lat},#{long}&client_id=WD42BVIP2QOPMWZLKANCX5U4CKNRFT03Z3M2NG4KDGXGWZQ3&client_secret=S3UAZIL2AX034UTUKN55LKUKCHAE3WTHRTB40UQRLNUSEYMO").read
     
     @venue_results = JSON.parse(json_venue_results)["response"]["minivenues"]
     
     # render text: @venue_results
     # redirect_to list_items_path
+  end
+  
+  def select
+    # @venue = Venue.new
+    # @venue.name = params[:name]
+    # @venue.foursquareid = params[:foursquareid]
+    # @venue.latitude = params[:lat]
+    # @venue.longitude = params[:long]
+    # @venue.address = params[:address]
+    # @venue.city = params[:city]
   end
   
 end

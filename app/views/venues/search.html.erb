@@ -2,7 +2,7 @@
 <ul class="nav nav-tabs nav-stacked">
 <% @venue_results.each do |venue| %>
     <li>
-        <%= link_to create_venue_path(:foursquareid => venue["id"], :name => venue["name"], :lat => venue["location"]["lat"], :long => venue["location"]["lng"], :address => venue["location"]["address"], :city => venue["location"]["city"], :list_id => @list_id), :method => :post do %>
+        <%= link_to select_venue_path(:foursquareid => venue["id"], :name => venue["name"], :lat => venue["location"]["lat"], :long => venue["location"]["lng"], :address => venue["location"]["address"], :city => venue["location"]["city"], :list_id => @list_id) do %>
         
          <%= venue["name"]%>  <%=venue["location"]["address"] %> <%= venue["location"]["city"] %> <i class="icon-chevron-right pull-right"></i>
          

@@ -1,14 +1,18 @@
-<div class="span12">
-<h1>This is 10 places</h1>
+<div class="span12" style="text-align: center;">
+<div class="hero-unit">
+  <div style="padding-bottom: 20px; padding-top: 20px">
+  <i class="icon-map-marker" style="font-size: 150px"></i>
+  </div>
+  </br>
+<h1 style="padding-bottom: 10px;">This is </br> 10 Places</h1>
+<h4 class="lead">Discover, create and share your top places to play</h4>
+<%= link_to "/auth/facebook", class: "btn btn-primary btn-large btn-block", :style => "font-size: 20px;" do %>
+<i class="icon-facebook-sign"></i> Sign in with Facebook
+<% end %></div>
 <p>
-<% if current_user %>
-  <p>Welcome back, <%= current_user.name %>!</p>
-  <%= link_to "Sign Out", signout_path, class: "btn btn-primary" %>
-<% else %>
-  <%= link_to "Sign in with Facebook", "/auth/facebook", class: "btn btn-primary" %>
-<% end %>
+
+
 </p>
 
 <%= link_to "test user login", test_login_path %>
-
 </div>
