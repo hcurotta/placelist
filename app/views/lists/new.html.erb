@@ -1,4 +1,95 @@
-<h1>Create a Playlist</h1>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false">
+<script>
+	$(document).ready(function(){
+		$("#inputName").focusout(function () {
+	         $(".step2").fadeIn();
+	    });
+	
+		$(".search-query").click(function (e) {
+	        $(".step3").fadeIn();
+	    });
+				
+	});
+	
+	
+</script>
 
-<%= render 'form' %>
+<style>
+	.step2 {
+		display: none;
+	}
+	
+	.step3 {
+		display: none;
+/*		padding-left: 200px;*/
+	}
+</style>
 
+<div class="row-fluid">
+  <div class="span12">
+    <div class="row-fluid">
+      <h1>Create a Placelist</h1>
+    </div>
+
+    <!--/row-->
+    <div class="row-fluid"><!--/span-->
+			<div class='step1'>
+      	<div class="span3" id="column_1">
+        	<h3>1. Describe your Placelist</h3>
+        <%= form_for @list, :remote => true do |f| %>
+					<%= f.hidden_field :user_id, {:value => current_user.id} %>
+          <div class="control-group">
+            <label class="control-label" for="inputName">Name your list:</label>
+            <div class="controls">
+							<%= f.text_field :name, placeholder: "Name", :class => "input-xlarge"  %>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">Tell your friend why they should go here:</label>
+            <div class="controls">
+							<%= f.text_area :description, placeholder: "Description", rows:'3', :class => "input-xlarge"  %>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">Upload Image:</label>
+            <img src="img/placeholder.png" height="280" width="280"  class="img-polaroid">
+            <div class="controls">
+              <input type="file" id="inputTags" placeholder="Tags">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">Add tags:</label>
+            <div class="controls">
+              <input type="text" id="inputTags" placeholder="Tags" class="input-xlarge">
+            </div>
+          </div>
+					<%= f.submit  %>
+			<% end %>
+			
+	      </div>
+			</div>
+		
+		<div class="step2">
+
+ 		</div>
+		
+     		<div class="span3 step3">
+	        <h3>3. Invite Collaborators</h3>
+	        <div class="well">
+	          <p>
+	            <button class="btn btn-large" type="button">Add collaborators</button>
+	          </p>
+	        </div>
+		        <!--/.well -->
+		        <h3>4. Publish your Placelist</h3>
+		        <div class="well alert-info">
+		          <p> <a class="btn btn-primary btn-large" href="create-placelist.php">Publish My Placelist</a> | <a href="#">Cancel</a></p>
+		        </div>
+					</div>
+	        <!--/.well --> 
+			
+		</div>
+		</div>
+    </div>
+  </div>
+</div>

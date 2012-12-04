@@ -15,14 +15,9 @@
 		map = new google.maps.Map(document.getElementById("map"), mapOptions);
 		
 		
-		$.getJSON("/lists/<%= @list.id %>.json", {}, function(data){
-			var LatLngList = new Array;
-			
+		$.getJSON("venues.json", {}, function(data){
 			$.each(data, function(i, item){
-			
-				LatLngList.push(new google.maps.LatLng(item.latitude, item.longitude));
 				
-					
 				var marker = new google.maps.Marker({
 					position: new google.maps.LatLng(item.latitude, item.longitude),
 					map: map,
@@ -37,16 +32,6 @@
 					infowindow.open(map, marker);
 				});
 			});
-			
-			var bounds = new google.maps.LatLngBounds ();
-			//  Go through each...
-			for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
-			  //  And increase the bounds to take this point
-			  bounds.extend (LatLngList[i]);
-			}
-			//  Fit these bounds to the map
-			map.fitBounds (bounds);
-			
 		});
 	}
 	$(function(){
@@ -56,10 +41,6 @@
 		// "live" bind click event
 		$("#markers a").live("click", function(){
 			var i = $(this).attr("rel");
-			map.setZoom(17);
-			var marker = arrMarkers[i].position
-			map.panTo(marker);
-			
 			// this next line closes all open infowindows before opening the selected one
 			for(x=0; x < arrInfoWindows.length; x++){ arrInfoWindows[x].close(); }
 			arrInfoWindows[i].open(map, arrMarkers[i]);
@@ -68,7 +49,7 @@
 </script>
 <style>
 #map{
-	width: 100%;
+	width: 640px;
 	height:660px; 
 }
 </style>
@@ -79,7 +60,7 @@
       <div class="row-fluid">
         <div class="span12">
           <div class="row-fluid">
-            <h2 class="span8"><%= @list.name %></h2>
+            <h2 class="span8">Exploring Portland</h2>
             <div class="span4 text-right well" >
               <button class="btn"><i class="icon-heart"></i></button>
               <button class="btn"><i class="icon-plus-sign"></i></button>
@@ -88,7 +69,7 @@
             </div>
           </div>
           <div class="row-fluid">
-            <div class="span8 well"><%= @list.description %></div>
+            <div class="span8 well">Not sure whether to pair your Cabernet with pork? Which white goes best with fish? Or prefer to drink a glass all by itself? If you&rsquo;re into wine: whether it&rsquo;s white, red, Rose or a blend, these NYC wine bars are sure to have something for everyone.</div>
             <div class="span4 well"> <strong>Tags:</strong> <a href="#">wine</a>, <a href="#">late night</a>, <a href="#">bars</a>, <a href="#">date night</a><br/>
               <strong>Published:</strong> October 09, 2012 <br/>
               <i class="icon-eye-open"></i> 80 <i class="icon-heart"></i> 14 (<a href="#">view all</a>) </div>
@@ -108,13 +89,13 @@
 				<% end %>
               </table>
             </div>
-            <div class="span8 img-polaroid"><div id="map"></div></div>
+            <div class="span8"><div id="map"></div></div>
           </div>
           
           <!-- begin: blog -->
           <div class="row-fluid">
             <div class="span12">
-              <h3>15 Comments on <%= @list.name %> (<a href="#">view all</a>)</h3>
+              <h3>15 Comments on Best Wine Bars in NYC (<a href="#">view all</a>)</h3>
             </div>
             <div class="span12">
               <div class="span2"><a href="placelist.php"><img src="img/placeholder.png" height="120" width="120" class="img-polaroid"></a></div>
@@ -184,9 +165,9 @@
       <div class="well">
         <h4>Created By</h4>
         <div class="row-fluid">
-          <div class="span6"> <a href="user-profile.php"><img src="<%= "http://graph.facebook.com/#{@list.user.uid}/picture?type=large" %>" height="100" width="100" class="img-polaroid"></a> </div>
+          <div class="span6"> <a href="user-profile.php"><img src="img/placeholder.png" height="100" width="100" class="img-polaroid"></a> </div>
           <div class="span5"> <a href="user-profile.php">
-            <h3><%= @list.user.name %></h3>
+            <h3>Nighttrain</h3>
             </a>
             <p> <a class="btn btn-large btn-block btn-success" href="#">Follow</a> </p>
           </div>
@@ -196,7 +177,7 @@
           <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> </div>
       </div>
       <div class="well">
-        <h4>Placelists by <%= @list.user.name %></h4>
+        <h4>Placelists by Nighttrain</h4>
         <div class="row-fluid"> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> <a href="placelist.php"><img src="img/placeholder.png" height="70" width="70" class="img-polaroid"></a> </div>
       </div>
       <!--/.well -->

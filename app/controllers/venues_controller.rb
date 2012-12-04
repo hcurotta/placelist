@@ -67,7 +67,7 @@ require "open-uri"
       @venue.name = params[:name]
       @venue.foursquareid = params[:foursquareid]
       @venue.latitude = params[:lat]
-      @venue.longitude = params[:long]
+      @venue.longitude = params[:lng]
       @venue.address = params[:address]
       @venue.city = params[:city]
       
@@ -125,8 +125,8 @@ require "open-uri"
     long = params[:lng]
     @list_id = params[:list_id]
     
-    
     json_venue_results = open("https://api.foursquare.com/v2/venues/suggestcompletion?query=#{query}&ll=#{lat},#{long}&client_id=WD42BVIP2QOPMWZLKANCX5U4CKNRFT03Z3M2NG4KDGXGWZQ3&client_secret=S3UAZIL2AX034UTUKN55LKUKCHAE3WTHRTB40UQRLNUSEYMO").read
+    
     
     @venue_results = JSON.parse(json_venue_results)["response"]["minivenues"]
     
@@ -142,6 +142,10 @@ require "open-uri"
     # @venue.longitude = params[:long]
     # @venue.address = params[:address]
     # @venue.city = params[:city]
+  end
+  
+  def all_venues
+    @venues = Venue.all
   end
   
 end

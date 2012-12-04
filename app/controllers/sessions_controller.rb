@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   end
   
   def create_test
-    user = User.find_by_uid(200) || User.create_test_user
+    user = User.find_by_uid(1) || User.create_test_user
     session[:user_id] = user.id
     redirect_to root_url, :notice => "Signed in!"
   end

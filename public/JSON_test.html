@@ -1,0 +1,90 @@
+<html>
+<head>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+		
+
+	<script>
+
+	  
+		$(document).ready(function(){
+			
+			var map;
+			var service;
+			var request;
+			
+
+			function watchTextbox() {
+			  var txtInput = $('#venue-search');
+			  var lastValue = txtInput.data('lastValue');
+			  var currentValue = txtInput.val();
+			  if (lastValue != currentValue && currentValue != '') {
+					lookupPlaces(currentValue)
+			    console.log('Value changed from ' + lastValue + ' to ' + currentValue);
+			    txtInput.data('lastValue', currentValue);
+			  }
+			}
+
+			function lookupPlaces(input) {
+				// $.getJSON("https://maps.googleapis.com/maps/api/place/autocomplete/json",
+				// {
+				//     sensor: false,
+				// 		type: 'establishment',
+				// 		key: 'AIzaSyDn129im6-rZzI9TbQExeIrgGnJUYXkhB4',
+				// 		callback: '?'
+				//   }, 
+				// 
+				// function(data){
+				// 	console.log('bla')
+				// 	// $.each(data.)
+				// });
+				
+				var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+
+			  map = new google.maps.Map(document.getElementById('map'), {
+			      mapTypeId: google.maps.MapTypeId.ROADMAP,
+			      center: pyrmont,
+			      zoom: 15
+			    });
+
+			  request = {
+			    // location: pyrmont,
+			    // radius: '500',
+			    query: input,
+					type: 'establishment'
+			  };
+			  
+				
+				service = new google.maps.places.PlacesService(map)
+				service.textSearch(request, callback);				
+				
+			}
+
+			// Check the textbox every 100 milliseconds.  This seems to be pretty responsive.
+			setInterval(watchTextbox, 100);
+
+		});
+		
+		function callback(results, status) {
+		$('#results').empty()
+		if (status == google.maps.places.PlacesServiceStatus.OK) {
+		    for (var i = 0; i < results.length; i++) {
+		      var place = results[i];
+		      console.log(place)
+					$('#results').append("<li><img src='"+results[i].icon+"' width='10px' height='10px'>"+results[i].name+"<li>"+results[i].formatted_address+"</li>")
+		    }
+		  }
+		}
+		
+	</script>
+</head>
+<body>
+	<input type="text" class="input-xlarge  search-query" id='venue-search'>
+		Results:
+		<ul id='results'>
+			
+		</ul>
+
+	<div id="map"></div>
+</body>
+</html>

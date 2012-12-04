@@ -1,0 +1,88 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery + Google Maps API v3 Demo</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+	var map;
+	var arrMarkers = [];
+	var arrInfoWindows = [];
+	
+	function mapInit(){
+		var centerCoord = new google.maps.LatLng(-33.86,151.20); 
+		var mapOptions = {
+			zoom: 9,
+			center: centerCoord,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+		
+		
+		$.getJSON("http://localhost:3000/venues.json", {}, function(data){
+			var LatLngList = array
+			$.each(data, function(i, item){
+				
+				// $("#markers").append('<li><a href="#" rel="' + i + '">' + item.name + '</a></li>');
+				
+				LatLngList.push(new google.maps.LatLng(item.latitude, item.longitude));
+				
+				
+				var marker = new google.maps.Marker({
+					position: new google.maps.LatLng(item.latitude, item.longitude),
+					map: map,
+					title: item.name
+				});
+				arrMarkers[i] = marker;
+				var infowindow = new google.maps.InfoWindow({
+					content: "<h3>"+ item.name +"</h3><p>"+ item.address +"</p>"
+				});
+				arrInfoWindows[i] = infowindow;
+				google.maps.event.addListener(marker, 'click', function() {
+					infowindow.open(map, marker);
+				});
+			});
+			
+			var bounds = new google.maps.LatLngBounds ();
+			//  Go through each...
+			for (var i = 0, LtLgLen = LatLngList.length; i < LtLgLen; i++) {
+			  //  And increase the bounds to take this point
+			  bounds.extend (LatLngList[i]);
+			}
+			//  Fit these bounds to the map
+			map.fitBounds (bounds);
+		});
+	}
+	$(function(){
+		// initialize map (create markers, infowindows and list)
+		mapInit();
+		
+		// "live" bind click event
+		$("#markers a").live("click", function(){
+			var i = $(this).attr("rel");
+			// this next line closes all open infowindows before opening the selected one
+			for(x=0; x < arrInfoWindows.length; x++){ arrInfoWindows[x].close(); }
+			arrInfoWindows[i].open(map, arrMarkers[i]);
+		});
+	});
+</script>
+<style type="text/css" media="screen">
+	img { border: 0; }
+	#map{
+		width: 763px;
+		height: 741px; 
+	}
+
+</style>
+</head>
+<body>
+	<div id="map"></div>
+	<div id="content">
+	<ul id="markers"></ul>
+	</div>
+</div>
+
+</body>
+</html>

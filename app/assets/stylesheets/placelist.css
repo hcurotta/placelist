@@ -1,0 +1,46 @@
+/* CSS Document */
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+	padding-left: 150px;
+	padding-right: 150px;
+}
+.sidebar-nav {
+	padding: 9px 0;
+}
+.placelist-small {
+	float: left;
+	margin-right: 10px;
+}
+.placelist-small p {
+	margin-top: 5px;
+}
+/* Footer */
+#extra .inner {
+	padding: 20px;
+	color: white;
+	background-color: #222;
+	border-top: 1px solid #555;
+}
+/* Text Alignment */ 
+.text-left {
+	text-align: left
+}
+.text-right {
+	text-align: right
+}
+.text-center {
+	text-align: center
+}
+.text-block {
+	text-align: block
+}
+.footnote {
+	font-style: italic;
+	color: #999;
+}
+/* Placelist */
+.list-scrolling {
+	height: 650px !important;
+	overflow: scroll;
+}

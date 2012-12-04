@@ -1,0 +1,138 @@
+	
+
+<script>
+
+  
+	$(document).ready(function(){
+		
+		var map;
+		var service;
+		var request;
+		
+
+		function watchTextbox() {
+		  var txtInput = $('#venue-search');
+		  var lastValue = txtInput.data('lastValue');
+		  var currentValue = txtInput.val();
+		  if (lastValue != currentValue && currentValue != '') {
+				console.log('Value changed from ' + lastValue + ' to ' + currentValue);
+				lookupPlaces(currentValue)
+		    txtInput.data('lastValue', currentValue);
+		  }
+		}
+		
+		function lookupPlaces(input) {
+			
+			var pyrmont = new google.maps.LatLng(-33.8665433,151.1956316);
+
+		  map = new google.maps.Map(document.getElementById('map'), {
+		      mapTypeId: google.maps.MapTypeId.ROADMAP,
+		      center: pyrmont,
+		      zoom: 15
+		    });
+
+		  request = {
+		    // location: pyrmont,
+		    // radius: '500',
+		    query: input,
+				type: 'establishment'
+		  };
+		  
+			
+			service = new google.maps.places.PlacesService(map)
+			service.textSearch(request, callback);				
+			
+		}
+
+		// Check the textbox every 100 milliseconds.  This seems to be pretty responsive.
+		setInterval(watchTextbox, 100);
+		
+	});
+	
+	function callback(results, status) {
+	$('#results-table').empty()
+	window.results = results
+	if (status == google.maps.places.PlacesServiceStatus.OK) {
+	    for (var i = 0; i < results.length; i++) {
+	      var place = results[i];
+	      console.log(place)
+				$('#results-table').append("<tr><td><img src='"+results[i].icon+"' width='20px' height='20px'><td><strong>"+results[i].name+"</strong><br/>"+results[i].formatted_address+"<br />(503) 735-5337</td><td><button onclick='createVenue("+i+")' class='btn btn-small add' id='"+i+"'>Add</button></td></tr>")
+
+	    }
+	  }
+	}
+	
+	
+	//post to the Create Venue controller
+	function createVenue(id) {
+		var selected = window.results[id];
+		console.log(selected.geometry.location.$a);
+		$.ajax({
+		  type: 'POST',
+		  url: '/venue',
+		  data: 
+			{
+				list_id: <%= @list.id %>,
+				name: selected.name,
+				foursquareid: selected.id,
+				address: selected.formatted_address,
+				lat: selected.geometry.location.$a,
+				lng: selected.geometry.location.ab
+			},
+		  success: addToList(selected),
+		});
+	}
+	
+	function addToList(selected){
+		console.log(selected.name)
+		$("#list").append("<tr><td>1.</td><td><div class='span3'><strong>"+selected.name+"</strong><br/>"+selected.formatted_address+"<br/>(503) 735-5337 </div><div class='span3'><p><strong>Tags:</strong></p><p><input class='input-xlarge' type='text' placeholder='Tell your friend why they should go here'></p></div></td><td><i class='icon-move'></i>&nbsp;&nbsp;&nbsp;<i class='icon-remove'></i></td></tr>");
+	}
+
+	
+</script>
+
+<div class="span6">
+   <h3>2. Add Places to <%= list.name %></h3>
+   <table class="table table-striped" id="list">
+     <tr>
+       <td>1.</td>
+       <td><div class="span3"> <strong>Some Bar Name</strong><br/>
+           240 North Broadway #2<br/>
+           Portland, OR 97227<br/>
+           (503) 735-5337 </div>
+         <div class="span3">
+           <p> <strong>Tags: </strong></p>
+           <p>
+             <input class="input-xlarge" type="text" placeholder="Tell your friend why they should go here">
+           </p>
+         </div></td>
+       <td><i class="icon-move"></i>&nbsp;&nbsp;&nbsp;<i class="icon-remove"></i></td>
+     </tr>
+
+   </table>
+
+   <h4>Add Places</h4>
+   <form class="form">
+       <input type="text" class="input-xlarge  search-query" id='venue-search'>
+   </form>
+   <div class="well">
+   <h5>Search Results</h5>
+
+	<!-- this map div doesn't show anything at the moment but is here to make the maps api work. Will get around to implementing later -->
+	<div id="map"></div> 
+	
+   <table class="table table-striped" id='results-table'>
+     <tr>
+       <td><strong>Some Bar Name</strong><br/>
+           240 North Broadway #2<br/>
+           Portland, OR 97227<br/>
+           (503) 735-5337</td>
+       <td>
+				<%=button_to "Add", create_item_path(), :method => :post, class: "btn btn-small add" %>
+				</td>
+     </tr>
+
+
+   </table>
+   </div>
+ </div>

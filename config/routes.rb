@@ -1,10 +1,13 @@
 TenPlaces::Application.routes.draw do
   
-  resources :list_items
+  resources :list_items, :except => :create
+  post "/list_items" => "list_items#create", :as => :create_item
 
   root :to => "Pages#home"
   
   resources :lists
+  
+  get "/all_venues" => "venues#all_venues"
 
   resources :venues, :except => :create
   post "/venue" => "venues#create", :as => :create_venue

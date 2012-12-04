@@ -19,10 +19,16 @@ class ListsController < ApplicationController
       @list.subscriptions.each do |subscriber|
       @subscriber = true if subscriber.user_id == current_user.id
     end
-      
+    
+    @venues = []
+    
+    @list.list_items.each do |item|
+      @venues << item.venue
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @list }
+      format.json { render json: @venues }
     end
   end
 
@@ -50,6 +56,7 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
+        format.js
         format.html { redirect_to @list, notice: 'List was successfully created.' }
         format.json { render json: @list, status: :created, location: @list }
       else

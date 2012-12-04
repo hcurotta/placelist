@@ -1,0 +1,9 @@
+<%= form_for @list, remote: true do |f| %>
+	<%= f.text_field :name, placeholder: "List Name" %>
+	<%= f.text_field :description, placeholder: "Description" %>
+	
+	<%= f.submit %>
+<% end %>
+<div id='step2'>
+	something here
+</div>
