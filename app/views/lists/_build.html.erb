@@ -94,21 +94,7 @@
 <div class="span6">
    <h3>2. Add Places to <%= list.name %></h3>
    <table class="table table-striped" id="list">
-     <tr>
-       <td>1.</td>
-       <td><div class="span3"> <strong>Some Bar Name</strong><br/>
-           240 North Broadway #2<br/>
-           Portland, OR 97227<br/>
-           (503) 735-5337 </div>
-         <div class="span3">
-           <p> <strong>Tags: </strong></p>
-           <p>
-             <input class="input-xlarge" type="text" placeholder="Tell your friend why they should go here">
-           </p>
-         </div></td>
-       <td><i class="icon-move"></i>&nbsp;&nbsp;&nbsp;<i class="icon-remove"></i></td>
-     </tr>
-
+			<!-- this is where list items get added -->
    </table>
 
    <h4>Add Places</h4>
@@ -122,17 +108,23 @@
 	<div id="map"></div> 
 	
    <table class="table table-striped" id='results-table'>
-     <tr>
-       <td><strong>Some Bar Name</strong><br/>
-           240 North Broadway #2<br/>
-           Portland, OR 97227<br/>
-           (503) 735-5337</td>
-       <td>
-				<%=button_to "Add", create_item_path(), :method => :post, class: "btn btn-small add" %>
-				</td>
-     </tr>
-
-
+		<!-- this is where search results go -->
    </table>
    </div>
  </div>
+
+
+<div class="span3">
+   <h3>3. Invite Collaborators</h3>
+   <div class="well">
+     <p>
+       <button class="btn btn-large" type="button">Add collaborators</button>
+     </p>
+   </div>
+     <!--/.well -->
+     <h3>4. Publish your Placelist</h3>
+     <div class="well alert-info">
+       <p> <%= link_to "Publish", list, class: "btn btn-primary btn-large" %> | <a href="#">Cancel</a></p>
+     </div>
+</div>
+      <!--/.well -->

@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   def create_test
     user = User.find_by_uid("5") || User.create_test_user
     session[:user_id] = user.id
-    redirect_to root_url, :notice => "Signed in!"
+    redirect_to new_list_url, :notice => "Signed in!"
   end
   
   def destroy
