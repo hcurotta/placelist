@@ -6,7 +6,7 @@ gem 'rails', '3.2.7'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem "omniauth-twitter"
 gem "omniauth-facebook", "1.4.1"
-gem "twitter-bootstrap-rails", :group => :assets
+gem "twitter-bootstrap-rails"
 gem 'thin'
 
 group :production do
