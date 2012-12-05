@@ -96,6 +96,7 @@
           <div class="row-fluid">
             <div class="span4 list-scrolling">
               <table class="table table-striped">
+				
 				<% @venues.each_with_index do |venue, i| %>
 				<tr id="markers">
                   <td><%= i+1 %></td>
@@ -106,6 +107,7 @@
                   <td nowrap><i class="icon-heart"></i>&nbsp;&nbsp; <a href="#" id="example" data-placement="bottom" data-trigger="hover" rel="popover" data-content="#bar #drinking #portland #goodtimes" data-original-title="Tags"><i class="icon-tags"></i></a></td>
                 </tr>
 				<% end %>
+				
               </table>
             </div>
             <div class="span8 img-polaroid"><div id="map"></div></div>

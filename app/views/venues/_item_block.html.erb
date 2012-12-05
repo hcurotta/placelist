@@ -1,4 +1,4 @@
-<tr id="list_item_<%= list_item.id %>">
+<%= content_tag_for :tr, list_item do %>
 	<td><%= venue.id %></td>
 	<td>
 		<div class='span3'>
@@ -12,9 +12,9 @@
 		</div>
 	</td>
 	<td>
-		<i class='icon-move'></i>&nbsp;&nbsp;&nbsp;
+		<i class='icon-move dragger'></i>&nbsp;&nbsp;&nbsp;
 		<%= link_to list_item, method: :delete, remote: true do %>
 			<i class='icon-remove'></i>
 		<% end %>
 	</td>
-</tr>
+<% end %>

@@ -81,4 +81,11 @@ class ListItemsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def sort
+    params[:list_item].each_with_index do |id, index|
+      ListItem.update_all({position: index+1}, {id: id, list_id: params[:list_id]})
+    end
+    render nothing: true  end
+  
 end

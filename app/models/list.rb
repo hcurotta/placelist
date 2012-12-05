@@ -9,8 +9,8 @@ class List < ActiveRecord::Base
   
   has_one :list_attribute
   
-  has_many :list_items
-  has_many :venues, :through => :list_items
+  has_many :list_items, :order => 'position ASC'
+  has_many :venues, :through => :list_items, :order => 'list_items.position ASC'
   has_many :subscriptions
 
 

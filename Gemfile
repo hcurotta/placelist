@@ -8,7 +8,7 @@ gem "omniauth-twitter"
 gem "omniauth-facebook", "1.4.1"
 gem "twitter-bootstrap-rails"
 gem 'thin'
-
+gem 'acts_as_list'
 group :production do
   gem 'pg'
 end

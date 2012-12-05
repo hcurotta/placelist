@@ -47,6 +47,18 @@
 		// Check the textbox every 100 milliseconds.  This seems to be pretty responsive.
 		setInterval(watchTextbox, 100);
 		
+		 
+     $( "#list tbody" ).sortable({
+				handle: '.dragger',
+				cursor: 'move',
+				axis: 'y',
+				update: function(event, ui){
+					console.log($(this).sortable('serialize'))
+					$.post($('#list').data('update-url'), ($(this).sortable('serialize')+'&'+$.param({ list_id: '<%= @list.id %>' })));
+					
+				}
+			});
+			
 	});
 	
 	function callback(results, status) {
@@ -92,9 +104,11 @@
 
 <div class="span6">
    <h3>2. Add Places to <%= list.name %></h3>
-   <table class="table table-striped" id="list">
+   <table class="table table-striped" id="list" data-update-url="<%= sort_list_items_url %>">
+		<tbody>
 			<!-- this is where list items get added -->
-   </table>
+   	</tbody>
+		</table>
 
    <h4>Add Places</h4>
    <form class="form">
