@@ -1,1 +1,1 @@
-$("#list").append("<%= escape_javascript(render('item_block', {:venue => @venue, :list_item => @list_item})) %>");
+$("<%= escape_javascript(render('item_block', {:venue => @venue, :list_item => @list_item})) %>").hide().appendTo("#list").fadeIn('fast');
