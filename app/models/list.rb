@@ -1,5 +1,5 @@
 class List < ActiveRecord::Base
-  attr_accessible :description, :list_item_id, :name, :user_id, :good_for_what, :good_on_daystring, :good_at_timestring, :good_when_weather_is
+  attr_accessible :description, :name, :user_id, :good_for_what, :good_on_daystring, :good_at_timestring, :good_when_weather_is
   
   belongs_to :user
   belongs_to :good_for

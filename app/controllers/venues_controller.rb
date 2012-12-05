@@ -52,12 +52,13 @@ require "open-uri"
     
     if @venue.present?
       
-      list_item = ListItem.new
-      list_item.venue_id = @venue.id
-      list_item.list_id = params[:list_id]
-      list_item.save
+      @list_item = ListItem.new
+      @list_item.venue_id = @venue.id
+      @list_item.list_id = params[:list_id]
+      @list_item.save
       
       respond_to do |format|
+        format.js
         format.html { redirect_to @venue, notice: 'Venue was successfully created.' }
         format.json { render json: @venue, status: :created, location: @venue }
       end
@@ -73,13 +74,14 @@ require "open-uri"
       
         if @venue.save
 
-          list_item = ListItem.new
-          list_item.venue_id = @venue.id
-          list_item.list_id = params[:list_id]
-          list_item.save
+          @list_item = ListItem.new
+          @list_item.venue_id = @venue.id
+          @list_item.list_id = params[:list_id]
+          @list_item.save
           
           respond_to do |format|
-            format.html { redirect_to list_item.list, notice: 'Venue added.' }
+            format.js
+            format.html { redirect_to @list_item.list, notice: 'Venue added.' }
             format.json { render json: @venue, status: :created, location: @venue }
           end
           

@@ -1,0 +1,37 @@
+<!doctype html>
+ 
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery UI Sortable - Default functionality</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <style>
+    #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #sortable tr { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+    #sortable tr span { position: absolute; margin-left: -1.3em; }
+    </style>
+    <script>
+    $(function() {
+        $( "#sortable" ).sortable();
+        $( "#sortable" ).disableSelection();
+    });
+    </script>
+</head>
+<body>
+ 
+<table id="sortable">
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</tr>
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</tr>
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</tr>
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</tr>
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</tr>
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</tr>
+    <tr class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</tr>
+</table>
+ 
+ 
+</body>
+</html>

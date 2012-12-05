@@ -1,0 +1,20 @@
+<tr id="list_item_<%= list_item.id %>">
+	<td><%= venue.id %></td>
+	<td>
+		<div class='span3'>
+			<strong><%= venue.name %></strong><br/>
+			<%= venue.address %><br/>
+			(503) 735-5337
+		</div>
+		<div class='span3'>
+			<p><strong>Tags:</strong></p>
+			<p><input class='input-xlarge' type='text' placeholder='Tell your friend why they should go here'></p>
+		</div>
+	</td>
+	<td>
+		<i class='icon-move'></i>&nbsp;&nbsp;&nbsp;
+		<%= link_to list_item, method: :delete, remote: true do %>
+			<i class='icon-remove'></i>
+		<% end %>
+	</td>
+</tr>
