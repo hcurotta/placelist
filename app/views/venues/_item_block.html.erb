@@ -1,5 +1,5 @@
 <%= content_tag_for :tr, list_item do %>
-	<td><%= venue.id %></td>
+	<td><%= list_item.position %></td>
 	<td>
 		<div class='span3'>
 			<strong><%= venue.name %></strong><br/>
@@ -9,7 +9,7 @@
 		<div class='span3'>
 			<p><strong>Tags:</strong></p>
 			<%= form_for list_item, remote: true do |f| %>
-				<p><%= f.text_field :description, placeholder: 'Tell your friend why they should go here', :class => 'input-xlarge', id: "item-description" %></p>
+				<p><%= f.text_field :description, placeholder: 'Tell your friend why they should go here', :class => 'input-xlarge', id: "item_description" %></p>
 			<% end %>
 		</div>
 	</td>
