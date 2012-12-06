@@ -59,6 +59,14 @@
 				}
 			});
 			
+			$('#item-description').keypress(function(e) {
+        if(e.which == 13) {
+            $(this).replaceWith(function() {
+						        return '<div>' + $(this).val() + '</div>';
+						    });
+        }
+			});
+			
 	});
 	
 	function callback(results, status) {

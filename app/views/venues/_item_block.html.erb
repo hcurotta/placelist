@@ -8,7 +8,9 @@
 		</div>
 		<div class='span3'>
 			<p><strong>Tags:</strong></p>
-			<p><input class='input-xlarge' type='text' placeholder='Tell your friend why they should go here'></p>
+			<%= form_for list_item, remote: true do |f| %>
+				<p><%= f.text_field :description, placeholder: 'Tell your friend why they should go here', :class => 'input-xlarge', id: "item-description" %></p>
+			<% end %>
 		</div>
 	</td>
 	<td>

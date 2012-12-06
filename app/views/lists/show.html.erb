@@ -97,12 +97,12 @@
             <div class="span4 list-scrolling">
               <table class="table table-striped">
 				
-				<% @venues.each_with_index do |venue, i| %>
+				<% @list.list_items.each_with_index do |item, i| %>
 				<tr id="markers">
                   <td><%= i+1 %></td>
-                  <td><h4><strong><a href="#" rel='<%= i %>'><%= venue.name %></a></strong><br/>
+                  <td><h4><strong><a href="#" rel='<%= i %>'><%= item.venue.name %></a></strong><br/>
                     </h4>
-                    <p class="details">Best craft beer in Portland!</p>
+                    <p class="details"><%= item.description %></p>
                     <p>by <a href="#">SomebodyElse</a></p></td>
                   <td nowrap><i class="icon-heart"></i>&nbsp;&nbsp; <a href="#" id="example" data-placement="bottom" data-trigger="hover" rel="popover" data-content="#bar #drinking #portland #goodtimes" data-original-title="Tags"><i class="icon-tags"></i></a></td>
                 </tr>
