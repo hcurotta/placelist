@@ -1,15 +1,16 @@
+
 <%= content_tag_for :tr, list_item do %>
 	<td><%= list_item.position %></td>
 	<td>
-		<div class='span3'>
+		<div class='span6'>
 			<strong><%= venue.name %></strong><br/>
 			<%= venue.address %><br/>
 			(503) 735-5337
 		</div>
-		<div class='span3'>
-			<p><strong>Tags:</strong></p>
+		<br/>
+		<div class='span6'>
 			<%= form_for list_item, remote: true do |f| %>
-				<p><%= f.text_field :description, placeholder: 'Tell your friend why they should go here', :class => 'input-xlarge', id: "item_description" %></p>
+				<p><%= f.text_field :description, placeholder: 'Tell your friend why they should go here', :class => 'input-xlarge item_description' %></p>
 			<% end %>
 		</div>
 	</td>
@@ -19,4 +20,16 @@
 			<i class='icon-remove'></i>
 		<% end %>
 	</td>
+
 <% end %>
+
+<script>
+$('.item_description').keyup(function(e) {
+	console.log("keyhit! ");
+  if(e.which == 13) {
+      $(this).replaceWith(function() {
+			        return $(this).val();
+			    });        
+			}
+});
+</script>

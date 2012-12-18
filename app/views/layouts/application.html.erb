@@ -6,6 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <script>window.scrollTo(0, 1);</script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -48,8 +49,8 @@
 	  </div>
 	</div>
 	<!--./navbar -->
-
-<%= yield %>
-
+	<div class='content'>
+		<%= yield %>
+	</div>
 </body>
 </html>
